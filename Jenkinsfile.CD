@@ -1,0 +1,41 @@
+
+pipeline {
+  agent any
+ 
+  tools {
+    nodejs "node"
+  }
+
+  parameters {
+    string(name: 'BUILD_TAG',  description: 'Docker image tag')
+    choice(name: 'ENVIRONMENT', choices: ['sit', 'prod'], description: 'Target environment') 
+  }
+
+  stages {
+    stage("Prepare") {
+      steps {
+        sh "yarn install --mutex network"
+      }
+    }
+
+    stage("Deploy") {
+      when {
+        expression {
+          BRANCH_NAME == 'dev' || BRANCH_NAME == 'main'
+        }
+      }
+      steps {
+        sh "yarn ci deploy -t ${BUILD_TAG} -e ${ENVIRONMENT}"
+      }
+    }
+  }
+
+  post {
+    always {
+      script {
+        sh "rm -rf ./.next"
+        sh "rm -rf node_modules"
+      }
+    }
+  }
+}

@@ -1,22 +1,79 @@
 {
   "name": "ielts-masters",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "type-check": "tsc --project tsconfig.lint.json && tsc --project cypress/tsconfig.json",
+    "test": "jest --coverage",
+    "test-all": "yarn lint && yarn type-check && yarn test",
+    "format": "prettier --write ./components ./pages ./utils",
+    "ci": "cd scripts && node ci",
+    "cypress:open": "yarn cypress open",
+    "cypress:run": "yarn cypress run",
+    "postinstall": "husky install"
+  },
+  "lint-staged": {
+    "*.ts?(x)": [
+      "eslint",
+      "yarn format"
+    ],
+    "*.?(s)css": [
+      "yarn format"
+    ]
   },
   "dependencies": {
+    "@cypress/code-coverage": "3.9.11",
+    "bcrypt": "5.0.1",
+    "bootstrap": "5.1.0",
+    "cypress-localstorage-commands": "1.5.0",
+    "dotenv": "10.0.0",
+    "jest": "27.2.2",
+    "mysql2": "2.3.0",
     "next": "11.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-bootstrap": "2.0.0-beta.6",
+    "react-dom": "17.0.2",
+    "remove": "0.1.5",
+    "sass": "1.43.4",
+    "sequelize": "6.6.5"
   },
   "devDependencies": {
+    "@commitlint/cli": "13.1.0",
+    "@commitlint/config-conventional": "13.1.0",
+    "@testing-library/dom": "8.6.0",
+    "@testing-library/jest-dom": "5.14.1",
+    "@testing-library/react": "12.1.0",
+    "@testing-library/user-event": "13.2.1",
+    "@types/bcrypt": "5.0.0",
+    "@types/jest": "27.0.2",
+    "@types/mysql": "2.15.19",
+    "@types/node": "16.10.3",
     "@types/react": "17.0.19",
+    "@types/sequelize": "types/sequelize",
+    "@types/validator": "13.6.3",
+    "@typescript-eslint/eslint-plugin": "4.30.0",
+    "@typescript-eslint/parser": "4.30.0",
+    "babel-jest": "27.2.2",
+    "chalk": "4.1.2",
+    "cypress": "8.4.1",
     "eslint": "7.32.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-airbnb-typescript": "14.0.0",
     "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-cypress": "2.12.1",
+    "eslint-plugin-import": "2.24.2",
+    "eslint-plugin-testing-library": "4.12.4",
+    "husky": "7.0.2",
+    "identity-obj-proxy": "3.0.0",
+    "jest-watch-typeahead": "0.6.4",
+    "lint-staged": "11.1.2",
+    "prettier": "2.4.1",
+    "promise-mysql": "5.0.3",
     "typescript": "4.4.2"
   }
 }

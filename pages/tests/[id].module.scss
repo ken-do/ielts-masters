@@ -1,0 +1,10 @@
+@import '~bootstrap/scss/_functions';
+@import '~bootstrap/scss/_variables';
+
+.colFirst {
+    border-right: 1px solid $black;
+}
+
+.colThird {
+    border-left: 1px solid $black;
+}

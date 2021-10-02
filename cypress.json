@@ -1,0 +1,14 @@
+{
+    "baseUrl": "http://localhost:3000",
+    "integrationFolder": "cypress/tests",
+    "chromeWebSecurity": false,
+    "retries": {
+        "runMode": 2,
+        "openMode": 1
+    },
+    "viewportHeight": 1000,
+    "viewportWidth": 1280,
+    "env": {
+        "mobileViewportWidthBreakpoint": 414
+    }
+}
